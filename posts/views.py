@@ -8,14 +8,7 @@ from .serializers import PostListSerializer, PostCreateSerializer, HashtagSerial
 from .permissions import IsOwnerOrReadOnly
 
 
-class PostViewSet(
-    viewsets.GenericViewSet,
-    mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.DestroyModelMixin,
-    mixins.ListModelMixin,
-    mixins.UpdateModelMixin,
-):
+class PostViewSet(viewsets.ModelViewSet):
     queryset = (
         Post.objects.select_related("user")
         .prefetch_related(
